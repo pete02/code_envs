@@ -11,5 +11,6 @@ pkgs.mkShell {
   shellHook = ''
     export CARGO_HOME=$PWD/.cargo
     export RUSTUP_HOME=$PWD/.rustup
+    export PATH="$PATH:/home/pete/.cargo/bin"
   '';
 }
