@@ -16,12 +16,18 @@
       devShells = forAllSystems (system:
         let
           overlays = [ (import rust-overlay) ];
-          pkgs = import nixpkgs { inherit system overlays; };
+          pkgs = import nixpkgs { 
+            inherit system overlays;
+            config.allowUnfree = true;
+          };
         in {
           rust = import ./rust.nix { inherit pkgs; };
           svelte= import ./svelte.nix { inherit pkgs;};
           python = import ./python.nix { inherit pkgs; };
           python-ml = import ./python-ml.nix {inherit pkgs; };
+          llama = import ./ollama.nix {inherit pkgs;};
+          dioxus = import ./dioxus.nix { inherit pkgs; };
+          go = import ./go.nix { inherit pkgs; };
         }
       );
     };
