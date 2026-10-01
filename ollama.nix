@@ -1,12 +1,21 @@
 { pkgs }:
 
 let
-  llama-overridden = pkgs.llama-cpp.override {
+  llama-overridden = pkgs.llama-cpp.overrideAttrs (old: {
+    src = pkgs.fetchFromGitHub {
+      owner = "ggml-org";
+      repo = "llama.cpp";
+      rev = "fc0fe40";
+      hash = "sha256-1o1TA8Rv3iNcJ2PStGDNrgBA91bO7WqGfr1LvfXqd4s=";
+    };
+  });
+
+  llama-cuda = llama-overridden.override {
     cudaSupport = true;
   };
 
   ollama-serve = pkgs.writeShellScriptBin "ollama-serve" ''
-    exec ${llama-overridden}/bin/llama-server \
+    exec ${llama-cuda}/bin/llama-server \
       -hf unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL \
       --port 8080 \
       --host 127.0.0.1 \
@@ -28,8 +37,6 @@ let
       --n-cpu-moe 24
   '';
 in
-
-
 
 pkgs.mkShell {
   buildInputs = [
