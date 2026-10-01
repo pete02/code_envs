@@ -2,28 +2,19 @@
 
 pkgs.mkShell {
   packages = with pkgs; [
-    rustc
-    cargo
-    rustfmt
-    clippy
-    rust-analyzer
-
+    rustup
     pkg-config
     lld
     gcc
-
-    dioxus-cli
   ];
 
   buildInputs = with pkgs; [
     openssl
   ];
 
-  RUST_SRC_PATH =
-    "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
-
   shellHook = ''
     export CARGO_HOME="$PWD/.cargo"
+    export RUSTUP_HOME="$PWD/.rustup"
     export PATH="$CARGO_HOME/bin:$PATH"
 
     echo "Dioxus environment ready!"
