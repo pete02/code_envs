@@ -1,5 +1,6 @@
+
 {
-  description = "Collection of devShells for Rust, Python, etc.";
+  description = "Collection of development shells";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -9,27 +10,35 @@
   outputs = { self, nixpkgs, rust-overlay, ... }:
     let
       systems = [ "x86_64-linux" ];
-      forAllSystems = f: builtins.listToAttrs
-        (map (system: { name = system; value = f system; }) systems);
-    in
-    {
+
+      forAllSystems = f: builtins.listToAttrs (
+        map (system: {
+          name = system;
+          value = f system;
+        }) systems
+      );
+    in {
       devShells = forAllSystems (system:
         let
-          overlays = [ (import rust-overlay) ];
-          pkgs = import nixpkgs { 
-            inherit system overlays;
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ (import rust-overlay) ];
             config.allowUnfree = true;
           };
-        in {
-          rust = import ./rust.nix { inherit pkgs; };
-          svelte= import ./svelte.nix { inherit pkgs;};
-          python = import ./python.nix { inherit pkgs; };
-          python-ml = import ./python-ml.nix {inherit pkgs; };
-          llama = import ./ollama.nix {inherit pkgs;};
-          dioxus = import ./dioxus.nix { inherit pkgs; };
-          go = import ./go.nix { inherit pkgs; };
-          booklegion = import ./booklegion.nix { inherit pkgs; };
-        }
+
+          shells = {
+            rust = import ./shells/rust.nix { inherit pkgs; };
+            svelte = import ./shells/svelte.nix { inherit pkgs; };
+            python = import ./shells/python.nix { inherit pkgs; };
+            python-ml = import ./shells/python-ml.nix { inherit pkgs; };
+            llama = import ./shells/llama.nix { inherit pkgs; };
+            dioxus = import ./shells/dioxus.nix { inherit pkgs; };
+            go = import ./shells/go.nix { inherit pkgs; };
+          };
+        in
+          shells // {
+
+          }
       );
     };
 }
