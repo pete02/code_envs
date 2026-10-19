@@ -28,6 +28,7 @@
           llama = import ./ollama.nix {inherit pkgs;};
           dioxus = import ./dioxus.nix { inherit pkgs; };
           go = import ./go.nix { inherit pkgs; };
+          booklegion = import ./booklegion.nix { inherit pkgs; };
         }
       );
     };
