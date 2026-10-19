@@ -116,8 +116,21 @@ fi
 echo
 echo "Created project shell: $output"
 echo "Created direnv configuration: $envrc"
-echo
 echo "Selected shells: ${selected[*]}"
+
+if git -C "$ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  git -C "$ROOT" add -- "projects/$name.nix"
+
+  if ! git -C "$ROOT" diff --cached --quiet -- "projects/$name.nix"; then
+    git -C "$ROOT" commit -m "Add $name development shell"
+  else
+    echo "No staged changes to commit for projects/$name.nix"
+  fi
+else
+  echo "Warning: $ROOT is not a Git repository; skipping commit." >&2
+fi
+
+echo
 echo "Activate with:"
 echo "  nix develop \"$ROOT#$name\""
 echo
