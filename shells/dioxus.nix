@@ -1,8 +1,13 @@
+
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
   packages = with pkgs; [
-    rustup
+    rustc
+    cargo
+    rustfmt
+    clippy
+    rust-analyzer
     pkg-config
     lld
     gcc
@@ -13,10 +18,6 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
-    export CARGO_HOME="$PWD/.cargo"
-    export RUSTUP_HOME="$PWD/.rustup"
-    export PATH="$CARGO_HOME/bin:$PATH"
-
     echo "Dioxus environment ready!"
   '';
 }

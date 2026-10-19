@@ -25,8 +25,8 @@ let
       --batch-size 1024 \
       --ubatch-size 1024 \
       --reasoning-format none \
-      --cache-type-k q8_0 \
-      --cache-type-v q8_0 \
+      --cache-type-k q4_0 \
+      --cache-type-v q4_0 \
       --temp 0.6 \
       --top-p 0.95 \
       --top-k 20 \
@@ -34,8 +34,8 @@ let
       --flash-attn on \
       --threads 16 \
       --no-mmproj \
-      -ngl 999 \
-      --n-cpu-moe 24
+      --n-cpu-moe 23 \
+      --no-host
   '';
 in
 
@@ -44,8 +44,8 @@ pkgs.mkShell {
     llama-overridden
     ollama-serve
   ];
-
   shellHook = ''
-    echo "llama environment ready!"
+    echo "CUDA llama-server: ${llama-cuda}/bin/llama-server"
+    ${llama-cuda}/bin/llama-server --list-devices
   '';
 }
