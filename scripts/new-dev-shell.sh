@@ -123,6 +123,7 @@ if git -C "$ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
 
   if ! git -C "$ROOT" diff --cached --quiet -- "projects/$name.nix"; then
     git -C "$ROOT" commit -m "Add $name development shell"
+    git -C "$ROOT" push
   else
     echo "No staged changes to commit for projects/$name.nix"
   fi
