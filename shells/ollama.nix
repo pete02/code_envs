@@ -17,7 +17,7 @@ let
   ollama-serve = pkgs.writeShellScriptBin "ollama-serve" ''
     exec ${llama-cuda}/bin/llama-server \
       -hf unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL \
-      --verbose
+      --verbose \
       --port 8080 \
       --host 127.0.0.1 \
       --ctx-size 131072 \
