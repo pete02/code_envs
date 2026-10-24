@@ -20,4 +20,5 @@ pkgs.mkShell {
   shellHook = ''
     echo "Dioxus environment ready!"
   '';
+  
 }
