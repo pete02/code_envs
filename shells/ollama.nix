@@ -15,8 +15,29 @@ let
   };
 
   ollama-serve = pkgs.writeShellScriptBin "ollama-serve" ''
+    MODEL="''${MODEL:-qwen}"
+
+    case "$MODEL" in
+      qwen-3.5)
+        HF_MODEL="unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL"
+        ;;
+      qwen-3.5)
+        HF_MODEL="unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL"
+        ;;
+      flint)
+        HF_MODEL="RecursiveSI/flint"
+        ;;
+      *)
+        echo "Unknown model: $MODEL" >&2
+        echo "Available models: qwen-3.5, qwen-3.8, flint" >&2
+        exit 1
+        ;;
+    esac
+
+    echo "Starting model: $MODEL ($HF_MODEL)"
+
     exec ${llama-cuda}/bin/llama-server \
-      -hf unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL \
+      -hf "$HF_MODEL" \
       --verbose \
       --port 8080 \
       --host 127.0.0.1 \
@@ -44,8 +65,10 @@ pkgs.mkShell {
     llama-overridden
     ollama-serve
   ];
+
   shellHook = ''
     echo "CUDA llama-server: ${llama-cuda}/bin/llama-server"
     ${llama-cuda}/bin/llama-server --list-devices
+    echo "Select model with: MODEL=qwen or MODEL=flint"
   '';
 }
