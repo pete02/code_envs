@@ -6,7 +6,7 @@ let
       owner = "ggml-org";
       repo = "llama.cpp";
       rev = "a37cc46104eb50900d5ab4a9ba02a0abdac039db";
-      hash = pkgs.lib.fakeHash;
+      hash = "sha256-xK7GHR5ywEgrgLAP8DVp+RjOV5065LT7XmpzBDOWf/0=";
     };
   });
 

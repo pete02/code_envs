@@ -7,4 +7,7 @@ pkgs.mkShell {
     shells.ollama
     shells.rust
   ];
+
+  RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+
 }

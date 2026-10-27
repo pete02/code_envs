@@ -1,11 +1,23 @@
+
 { pkgs ? import <nixpkgs> {} }:
+
 pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [ rustc cargo gcc rustfmt clippy pkg-config pkgs.lld];
+  strictDeps = true;
 
-
-  buildInputs=[
-    pkgs.openssl
+  nativeBuildInputs = with pkgs; [
+    rustc
+    cargo
+    rust-analyzer
+    rustfmt
+    clippy
+    gcc
+    lld
+    pkg-config
   ];
+
+  buildInputs = with pkgs; [
+    openssl
+  ];
+
   RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
-  
 }
