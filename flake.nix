@@ -4,9 +4,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    strata-src = {
+      url = "github:Niko1221/Strata";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs,  ... }:
+  outputs = { self, nixpkgs, strata-src, ... }:
     let
       systems = [ "x86_64-linux" ];
 
@@ -35,6 +40,10 @@
             config.allowUnfree = true;
           };
 
+          inputs = {
+            inherit strata-src;
+          };
+
           shells = builtins.listToAttrs (
             map (file:
               let
@@ -43,7 +52,7 @@
               {
                 inherit name;
                 value = import (./shells + "/${file}") {
-                  inherit pkgs;
+                  inherit pkgs inputs;
                 };
               }
             ) (nixFilesIn ./shells)
@@ -57,7 +66,7 @@
               {
                 inherit name;
                 value = import (./projects + "/${file}") {
-                  inherit pkgs shells;
+                  inherit pkgs shells inputs;
                 };
               }
             ) (nixFilesIn ./projects)

@@ -1,4 +1,4 @@
-{ pkgs, shells }:
+{ pkgs, shells, ... }:
 
 pkgs.mkShell {
   inputsFrom = [
