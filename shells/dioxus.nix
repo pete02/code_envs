@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ,... }:
 let
   wasm-bindgen-cli = pkgs.buildWasmBindgenCli rec {
     src = pkgs.fetchCrate {

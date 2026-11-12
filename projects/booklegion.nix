@@ -4,7 +4,7 @@ pkgs.mkShell {
   inputsFrom = [
     shells.dioxus
     shells.go
-    shells.ollama
+    shells.strata
     shells.rust
   ];
 

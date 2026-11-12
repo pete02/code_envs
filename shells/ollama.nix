@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 
 let
   llama-overridden = pkgs.llama-cpp.overrideAttrs (old: {

@@ -83,14 +83,16 @@ let
     echo "Data: $dataDir"
     echo ""
 
-    exec ./setup.sh \
-      --family coder \
-      --model IQ1_M \
-      --context 64000 \
-      --vision no \
-      --data-dir "$dataDir" \
-      --yes \
-      "$@"
+  exec ./setup.sh \
+    --family qwen \
+    --model IQ3_S \
+    --kv int8 \
+    --resident-budget-gib 18 \
+    --vision no \
+    --gguf-dir "$HOME/models/Qwen3.8-Flash-Next-IQ3_S/IQ3_S" \
+    --data-dir "$dataDir" \
+    --yes \
+    "$@"
   '';
 in
 pkgs.mkShell {
