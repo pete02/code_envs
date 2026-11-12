@@ -85,11 +85,11 @@ let
 
   exec ./setup.sh \
     --family qwen \
-    --model IQ3_S \
+    --model IQ3_XXS \
     --kv int8 \
     --resident-budget-gib 18 \
     --vision no \
-    --gguf-dir "$HOME/models/Qwen3.8-Flash-Next-IQ3_S/IQ3_S" \
+    --gguf-dir "$HOME/models/Qwen3.8-Flash-Next-IQ3_XXS/IQ3_XXS" \
     --data-dir "$dataDir" \
     --yes \
     "$@"
