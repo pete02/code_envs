@@ -3,5 +3,6 @@
 pkgs.mkShell {
   inputsFrom = [
     shells.strata
+    shells.nixos
   ];
 }
