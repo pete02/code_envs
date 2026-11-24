@@ -110,7 +110,7 @@ pkgs.mkShell {
   packages = with pkgs; [
     git curl wget cacert pciutils procps
     python312 python312Packages.pip python312Packages.virtualenv
-    python312Packages.setuptools python312Packagesa.wheel uv
+    python312Packages.setuptools python312Packages.wheel uv
     gnumake cmake ninja pkg-config
     cuda.backendStdenv.cc
     cudaToolkit
