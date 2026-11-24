@@ -89,6 +89,9 @@ let
     --kv int8 \
     --resident-budget-gib 18 \
     --vision no \
+    --context 81920 \
+    --host 0.0.0.0 \
+    --api-key "Strata_Api_key" \
     --gguf-dir "$HOME/models/Qwen3.8-Flash-Next-IQ3_XXS/IQ3_XXS" \
     --data-dir "$dataDir" \
     --yes \
