@@ -42,6 +42,12 @@ let
     export CMAKE_CUDA_COMPILER="$STRATA_NVCC"
     export CMAKE_CUDA_HOST_COMPILER="${hostCxx}"
 
+    export NIX_SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+    export SSL_CERT_FILE="$NIX_SSL_CERT_FILE"
+    export REQUESTS_CA_BUNDLE="$NIX_SSL_CERT_FILE"
+    export CURL_CA_BUNDLE="$NIX_SSL_CERT_FILE"
+    export GIT_SSL_CAINFO="$NIX_SSL_CERT_FILE"
+
     export STRATA_CUDA_ARCH=89
     export CMAKE_CUDA_ARCHITECTURES=89
 
