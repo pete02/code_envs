@@ -93,7 +93,7 @@ let
     --family qwen \
     --model IQ3_XXS \
     --kv int8 \
-    --resident-budget-gib 18 \
+    --resident-budget-gib 13 \
     --vision no \
     --context 81920 \
     --host 0.0.0.0 \
@@ -110,7 +110,7 @@ pkgs.mkShell {
   packages = with pkgs; [
     git curl wget cacert pciutils procps
     python312 python312Packages.pip python312Packages.virtualenv
-    python312Packages.setuptools python312Packages.wheel uv
+    python312Packages.setuptools python312Packagesa.wheel uv
     gnumake cmake ninja pkg-config
     cuda.backendStdenv.cc
     cudaToolkit
