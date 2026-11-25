@@ -91,7 +91,7 @@ let
 
   exec ./setup.sh \
     --family qwen \
-    --model IQ3_XXS \
+    --model IQ1_M \
     --kv int8 \
     --resident-budget-gib 13 \
     --vision no \
