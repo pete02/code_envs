@@ -91,14 +91,14 @@ let
 
   exec ./setup.sh \
     --family qwen \
-    --model IQ1_M \
+    --model IQ3_XXS \
     --kv int8 \
     --resident-budget-gib 13 \
     --vision no \
     --context 64000 \
     --host 0.0.0.0 \
     --api-key "Strata_Api_key" \
-    --gguf-dir "$HOME/models/Qwen3.8-Flash-Next-Coder-IQ1_M/IQ1_M" \
+    --gguf-dir "$HOME/models/Qwen3.8-Flash-Next-IQ3_XXS/IQ3_XXS" \
     --data-dir "$dataDir" \
     --yes \
     "$@"
